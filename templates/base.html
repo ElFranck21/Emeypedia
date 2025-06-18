@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emeypedia</title>
+    <title>{% block title %}Bienvenido{% endblock %}</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Bienvenido a Emeypedia</h1>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Aquí se mostrará el contenido de las plantillas hijas -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Emeypedia</p>
+    </footer>
 </body>
 </html>

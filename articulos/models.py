@@ -10,16 +10,16 @@ class Articulo (models.Model):
         ('galeria', 'Galería de imágenes'),
     ]
     subcategoria = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    contenido_texto=models.TextField(default='')
+    tipo = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
+    contenido_texto = models.TextField(default='')
     subcategoria2 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    contenido_texto2=models.TextField(default='')
+    contenido_texto2 = models.TextField(default='')
     subcategoria3 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    gameplay = models.FileField(upload_to='', blank=True, null=True)
+    gameplay = models.FileField(upload_to='', blank=True, null=True, default='resumen')
     subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    contenido_texto4=models.TextField(default='')
+    contenido_texto4 = models.TextField(default='')
     subcategoria5 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    imagenes =models.ImageField(upload_to='')
+    imagenes = models.ImageField(upload_to='')
 
 
     def __str__(self):
