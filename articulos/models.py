@@ -9,16 +9,17 @@ class Articulo (models.Model):
         ('guias', 'Guías'),
         ('galeria', 'Galería de imágenes'),
     ]
-    subcategoria = models.CharField(max_length=20, choices=CATEGORIAS)
+    subcategoria = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
+    tipo = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto=models.TextField(default='')
-    subcategoria2 = models.CharField(max_length=20, choices=CATEGORIAS)
+    subcategoria2 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto2=models.TextField(default='')
-    subcategoria3 = models.CharField(max_length=20, choices=CATEGORIAS)
-    gameplay = models.FileField(upload_to='', blank=True, null=True)
-    subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS)
-    subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS)
+    subcategoria3 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
+    gameplay = models.FileField(upload_to='', blank=True, null=True, default='resumen')
+    subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
+    subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto4=models.TextField(default='')
-    subcategoria5 = models.CharField(max_length=20, choices=CATEGORIAS)
+    subcategoria5 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     imagenes =models.ImageField(upload_to='')
 
 
