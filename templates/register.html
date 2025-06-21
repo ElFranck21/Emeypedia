@@ -4,36 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro de Usuario</title>
-    <style>
-        body { font-family: Arial; background: #f5f5f5; padding: 2rem; }
-        .container {
-            background: white; padding: 2rem; max-width: 400px;
-            margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input { width: 100%; padding: 10px; margin: 0.5rem 0; }
-        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; }
-        ul { padding: 0; list-style: none; }
-        ul li { margin-bottom: 1rem; }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Crear Cuenta</h2>
-        
-        {% if messages %}
-          <ul>
-            {% for message in messages %}
-              <li style="color: red;">{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+    <h2>Crear Cuenta</h2>
 
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Registrarse</button>
-        </form>
-        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
-    </div>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
 </body>
 </html>
