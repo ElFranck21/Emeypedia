@@ -5,6 +5,7 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from articulos import views  
 from django.contrib.auth import views as auth_views
+from usuarios.forms import LoginForm
 from usuarios.views import dashboard, register
 
 
@@ -12,7 +13,7 @@ from usuarios.views import dashboard, register
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('articulos.urls')),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html', authentication_form=LoginForm), name='login'),
     path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
