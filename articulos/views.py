@@ -6,8 +6,7 @@ from articulos.models import Articulo
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def hello(request):
-    articulo = Articulo.objects.first()
-    return render(request, 'articulos.html', {'article': articulo})
+def showArticle(request):
+    return render(request, 'articulos.html')
 
 
