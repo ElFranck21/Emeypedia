@@ -1,6 +1,5 @@
 from pyexpat.errors import messages
 from django.shortcuts import redirect, render
-# views.py
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib.auth import login
@@ -11,7 +10,7 @@ from django.contrib.auth.models import User
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-#vista de registro de usuarios
+
 def register(request):
     if request.method == 'POST':
         form = RegistroUsuarioForm(request.POST)

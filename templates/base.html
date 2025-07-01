@@ -63,23 +63,25 @@
                 </nav>
 
 
-                <main class="container fluid p-0">
+                <main class="container-fluid px-0 mx-0">
                     {% block content %}
 
                     {% endblock %}
                 </main>
-                <footer class="text-white py-4 mt-5" >
-                    <div class="container text-center">
-                        <div class="d-flex justify-content-center align-items-center mb-2">
-                            <img src="{% static 'assets/logo.png' %}" alt="Logo" width="30" height="30" class="me-2">
-                            <span class="fw-light">© 2025 EMEYPEDIA. Todos los derechos reservados.</span>
-                        </div>
-                    </div>
-                </footer>
+
+<footer class="text-white py-4 mt-5" style="background: linear-gradient(to right, #1f1c2c, #77709b);">
+    <div class="container text-center">
+        <div class="d-flex justify-content-center align-items-center mb-2">
+            <img src="{% static 'assets/logo.png' %}" alt="Logo" width="30" height="30" class="me-2">
+            <span class="fw-light">© 2025 EMEYPEDIA. Todos los derechos reservados.</span>
+        </div>
+    </div>
+</footer>
 
                 </div>
     </div>
     
+
 
 
 </body>
