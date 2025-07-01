@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: white !important;
+    }
+
+    .parent {
+        display: grid;
+        grid-template-columns: 2fr 6fr 2fr;
+        gap: 20px;
+        width: 100%;
+        margin: 0;
+        padding: 40px 60px;
+        box-sizing: border-box;
+        background-color: white;
+        color: black;
+    }
+
+    .div3,
+    .div5,
+    .div6 {
+        background-color: #f8f8f8;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .div3 {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+
+    .div6 {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+
+    .toc ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .toc li {
+        margin-bottom: 10px;
+    }
+
+    .toc a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .toc a:hover {
+        text-decoration: underline;
+    }
+
+    .comment-box textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        padding: 8px;
+        resize: none;
+    }
+
+    .btn-comentar {
+        background-color: #00cccc;
+        color: black;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    h1, h3 {
+        color: #111;
+    }
+
+    video,
+    img {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+</style>
+
+<div class="parent">
+    <div class="div3 toc">
+        <h5><strong>Tabla de contenidos</strong></h5>
+        <ul>
+            {% if articulo.subcategoria %}<li><a href="#sec1">1.- {{ articulo.get_subcategoria_display }}</a></li>{% endif %}
+            {% if articulo.subcategoria2 %}<li><a href="#sec2">2.- {{ articulo.get_subcategoria2_display }}</a></li>{% endif %}
+            {% if articulo.subcategoria3 %}<li><a href="#sec3">3.- {{ articulo.get_subcategoria3_display }}</a></li>{% endif %}
+            {% if articulo.subcategoria4 %}<li><a href="#sec4">4.- {{ articulo.get_subcategoria4_display }}</a></li>{% endif %}
+            {% if articulo.subcategoria5 %}<li><a href="#sec5">5.- {{ articulo.get_subcategoria5_display }}</a></li>{% endif %}
+        </ul>
+    </div>
+
+    <div class="div5">
+        <h1>{{ articulo.titulo }}</h1>
+        <hr>
+        {% if articulo.subcategoria %}
+            <h3 id="sec1">{{ articulo.get_subcategoria_display }}</h3>
+            <p>{{ articulo.contenido_texto }}</p>
+        {% endif %}
+
+        {% if articulo.subcategoria2 %}
+            <h3 id="sec2">{{ articulo.get_subcategoria2_display }}</h3>
+            <p>{{ articulo.contenido_texto2 }}</p>
+        {% endif %}
+
+        {% if articulo.subcategoria3 and articulo.gameplay %}
+            <h3 id="sec3">{{ articulo.get_subcategoria3_display }}</h3>
+            <video controls>
+                <source src="{{ articulo.gameplay.url }}" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+        {% endif %}
+
+        {% if articulo.subcategoria4 %}
+            <h3 id="sec4">{{ articulo.get_subcategoria4_display }}</h3>
+            <p>{{ articulo.contenido_texto4 }}</p>
+        {% endif %}
+
+        {% if articulo.subcategoria5 and articulo.imagenes %}
+            <h3 id="sec5">{{ articulo.get_subcategoria5_display }}</h3>
+            <img src="{{ articulo.imagenes.url }}" alt="Imagen de {{ articulo.titulo }}">
+        {% endif %}
+    </div>
+
+    <div class="div6">
+    <div class="comentarios bg-white text-dark p-3 rounded">
+        <h5>Comentarios</h5>
+
+                {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'agregar_comentario' articulo.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-info w-100 mt-2" type="submit">Comentar</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Inicia sesión</a> para comentar.</p>
+        {% endif %}
+
+        <hr>
+
+
+        {% for comentario in articulo.comentarios.all %}
+            <div class="mb-2 border-bottom pb-2">
+                <strong>{{ comentario.usuario.username }}</strong><br>
+                <p>{{ comentario.texto }}</p>
+                <small>{{ comentario.fecha_creacion|date:"d/m/Y H:i" }}</small>
+            </div>
+        {% empty %}
+            <p>No hay comentarios aún.</p>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+</div>
+{% endblock %}

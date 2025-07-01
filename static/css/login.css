@@ -1,0 +1,37 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    background-color: #ffffffcc;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-custom {
+    background-color: #198754;
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #157347;
+}
+

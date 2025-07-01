@@ -1,7 +1,13 @@
 from django.db import models
 
-class Articulo (models.Model):
-    titulo= models.CharField(max_length=30)
+
+class Articulo(models.Model):
+    TIPOS = [
+        ('juego', 'Juego'),
+        ('serie', 'Serie'),
+        ('pelicula', 'Película'),
+    ]
+
     CATEGORIAS = [
         ('resumen', 'Resumen'),
         ('historia', 'Historia'),
@@ -9,18 +15,20 @@ class Articulo (models.Model):
         ('guias', 'Guías'),
         ('galeria', 'Galería de imágenes'),
     ]
+
+    titulo = models.CharField(max_length=30)
+    tipo = models.CharField(max_length=20, choices=TIPOS, default='juego') 
+
     subcategoria = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    tipo = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto = models.TextField(default='')
     subcategoria2 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto2 = models.TextField(default='')
     subcategoria3 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    gameplay = models.FileField(upload_to='', blank=True, null=True, default='resumen')
+    gameplay = models.FileField(upload_to='', blank=True, null=True)
     subcategoria4 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
     contenido_texto4 = models.TextField(default='')
     subcategoria5 = models.CharField(max_length=20, choices=CATEGORIAS, default='resumen')
-    imagenes = models.ImageField(upload_to='')
-
+    imagenes = models.ImageField(upload_to='articulos/', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.titulo} - {self.get_tipo_display()}"
+      return f"{self.titulo} - {self.get_tipo_display()}"
