@@ -5,51 +5,90 @@
 
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-<div class="hero-banner">
-    <div class="overlay"></div>
-    <div class="hero-content">
-        <h1 class="display-4">Bienvenido a EMEYPEDIA</h1>
-        <p class="lead">Explora una enciclopedia de videojuegos, series, películas y cultura geek.</p>
-        <a href="#articulos" class="btn btn-primary">Explorar artículos</a>
+<!-- Carrusel de Banner -->
+<div id="carouselBanner" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/banner1.jpg' %}" class="d-block w-100" alt="Banner 1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Bienvenido a EMEYPEDIA</h5>
+        <p>Explora artículos de videojuegos, series, películas y cultura geek.</p>
+      </div>
     </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/banner2.jpg' %}" class="d-block w-100" alt="Banner 2">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Contenido Actualizado</h5>
+        <p>Encuentra lo más nuevo de tus franquicias favoritas.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/banner3.jpg' %}" class="d-block w-100" alt="Banner 3">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Comparte y Descubre</h5>
+        <p>Una wiki hecha por fans, para fans.</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselBanner" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselBanner" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
 </div>
+
 
 <h2 class="section-title" id="articulos">Juegos Populares</h2>
 <div class="card-scroll">
-    <div class="media-card">
-        <img src="{% static 'img/game1.jpg' %}" alt="Game 1">
-        <div class="title">The Last of Us</div>
-    </div>
-    <div class="media-card">
-        <img src="{% static 'img/game2.jpg' %}" alt="Game 2">
-        <div class="title">Elden Ring</div>
-    </div>
-    <!-- Agrega más juegos -->
+  {% for juego in juegos %}
+    {% if juego.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' juego.id %}">
+          <img src="{{ juego.imagenes.url }}" alt="{{ juego.titulo }}">
+          <div class="title">{{ juego.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay juegos disponibles aún.</p>
+  {% endfor %}
 </div>
+
 
 <h2 class="section-title">Series Destacadas</h2>
 <div class="card-scroll">
-    <div class="media-card">
-        <img src="{% static 'img/serie1.jpg' %}" alt="Serie 1">
-        <div class="title">Breaking Bad</div>
-    </div>
-    <div class="media-card">
-        <img src="{% static 'img/serie2.jpg' %}" alt="Serie 2">
-        <div class="title">Prison Break</div>
-    </div>
-    <!-- Agrega más series -->
+  {% for serie in series %}
+    {% if serie.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' serie.id %}">
+          <img src="{{ serie.imagenes.url }}" alt="{{ serie.titulo }}">
+          <div class="title">{{ serie.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay series disponibles aún.</p>
+  {% endfor %}
 </div>
 
 <h2 class="section-title">Películas Clásicas</h2>
 <div class="card-scroll">
-    <div class="media-card">
-        <img src="{% static 'img/movie1.jpg' %}" alt="Movie 1">
-        <div class="title">The Matrix</div>
-    </div>
-    <div class="media-card">
-        <img src="{% static 'img/movie2.jpg' %}" alt="Movie 2">
-        <div class="title">Pulp Fiction</div>
-    </div>
-    <!-- Agrega más películas -->
+  {% for pelicula in peliculas %}
+    {% if pelicula.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' pelicula.id %}">
+          <img src="{{ pelicula.imagenes.url }}" alt="{{ pelicula.titulo }}">
+          <div class="title">{{ pelicula.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay películas disponibles aún.</p>
+  {% endfor %}
 </div>
+
 {% endblock %}

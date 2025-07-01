@@ -1,3 +1,12 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 body {
     background: linear-gradient(135deg, #1f1c2c, #928dab);
     background-attachment: fixed;
@@ -17,7 +26,7 @@ input[type="password"] {
 }
 
 .btn-custom {
-    background-color: #198754; /* verde Bootstrap */
+    background-color: #198754;
     color: white;
     border: none;
 }
@@ -25,3 +34,4 @@ input[type="password"] {
 .btn-custom:hover {
     background-color: #157347;
 }
+
