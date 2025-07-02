@@ -15,7 +15,7 @@
         <h4>Menú</h4>
         <ul class="dashboard-menu">
             <li><a href="#" class="btn-dash">Mi perfil</a></li>
-            <li><a href="#" class="btn-dash">Mis artículos</a></li>
+            <li><a href="{% url 'crear_articulo' %}" class="btn-dash">Subir Articulo</a></li>
             <li><a href="#" class="btn-dash">Ajustes</a></li>
             <li>
                 <form method="post" action="{% url 'logout' %}">
