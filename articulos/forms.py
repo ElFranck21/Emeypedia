@@ -20,6 +20,7 @@ class ArticuloAdminForm(forms.ModelForm):
                 raise ValidationError({'subcategoria': 'No puede seleccionar esta opción para películas o series.'})
             if subcategoria2 in restricted:
                 raise ValidationError({'subcategoria2': 'No puede seleccionar esta opción para películas o series.'})
+            
         return cleaned_data
 
 class ArticuloForm(forms.ModelForm):

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-white mb-4">Resultados para: "{{ query }}"</h2>
+
+    {% if resultados %}
+        <div class="row">
+            {% for articulo in resultados %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        {% if articulo.imagenes %}
+                            <img src="{{ articulo.imagenes.url }}" class="card-img-top" alt="{{ articulo.titulo }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ articulo.titulo }}</h5>
+                            <p class="card-text"><strong>Tipo:</strong> {{ articulo.get_tipo_display }}</p>
+                            <a href="{% url 'detalle_articulo' articulo.id %}" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-white">No se encontraron resultados.</p>
+    {% endif %}
+</div>
+{% endblock %}

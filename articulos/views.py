@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from articulos.forms import ArticuloForm
 from articulos.models import Articulo
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 def showArticle(request):
@@ -32,4 +33,38 @@ def crear_articulo(request):
     
     return render(request, 'crear_articulo.html', {'form': form})
 
+
+
+def buscar_articulos(request):
+    query = request.GET.get('q')
+    resultados = []
+
+    if query:
+        resultados = Articulo.objects.filter(
+            Q(titulo__icontains=query) |
+            Q(subcategoria__icontains=query) |
+            Q(subcategoria2__icontains=query) |
+            Q(subcategoria3__icontains=query) |
+            Q(subcategoria4__icontains=query) |
+            Q(subcategoria5__icontains=query) |
+            Q(subcategoria6__icontains=query) |
+            Q(subcategoria7__icontains=query) |
+            Q(subcategoria8__icontains=query) |
+            Q(subcategoria9__icontains=query) |
+            Q(subcategoria10__icontains=query) |
+            Q(contenido_texto__icontains=query) |
+            Q(contenido_texto2__icontains=query) |
+            Q(contenido_texto4__icontains=query) |
+            Q(contenido_texto6__icontains=query) |
+            Q(contenido_texto7__icontains=query) |
+            Q(contenido_texto8__icontains=query) |
+            Q(contenido_texto9__icontains=query) |
+            Q(contenido_texto10__icontains=query) |
+            Q(autor__username__icontains=query)
+        ).distinct()
+
+    return render(request, 'buscar_resultados.html', {
+        'query': query,
+        'resultados': resultados
+    })
 
