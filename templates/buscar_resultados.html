@@ -8,7 +8,7 @@
     {% if resultados %}
         <div class="row g-4">
             {% for articulo in resultados %}
-                <div class="col-6 col-md-4 col-lg-3"> <!-- Más tarjetas por fila -->
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100" style="transition: transform 0.3s;">
                         {% if articulo.imagenes %}
                             <img src="{{ articulo.imagenes.url }}" class="card-img-top" alt="{{ articulo.titulo }}" style="height: 160px; object-fit: cover;">
