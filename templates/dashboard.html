@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<body>
+
+    <div class="parent">
+    <div class="div1 header">
+        <h1 class="text-white">Bienvenido, {{ user.username }}</h1>
+    </div>
+
+    <div class="div2 sidebar">
+        <h4>Menú</h4>
+        <ul class="dashboard-menu">
+            <li><a href="#" class="btn-dash">Mi perfil</a></li>
+            <li><a href="#" class="btn-dash">Mis artículos</a></li>
+            <li><a href="#" class="btn-dash">Ajustes</a></li>
+            <li>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-dash logout">Cerrar sesión</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="div3 content box text-white">
+        <h2>Tu actividad reciente</h2>
+        <p>Aquí verás tus artículos, comentarios y actividad en la plataforma.</p>
+    </div>
+
+    <div class="div4 box">Notificaciones</div>
+    <div class="div5 box">Favoritos</div>
+    <div class="div6 box">Estadísticas</div>
+    <div class="div7 box">Más</div>
+</div>
+
+
+</body>
+{% endblock %}
