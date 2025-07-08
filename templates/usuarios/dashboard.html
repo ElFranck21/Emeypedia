@@ -26,11 +26,32 @@
         </ul>
     </div>
 
-    <div class="div3 content box text-white">
-        <h2>Tu actividad reciente</h2>
-        <p>Aquí verás tus artículos, comentarios y actividad en la plataforma.</p>
-    </div>
+<div class="div3 content">
+    <h5>Tu actividad reciente</h5>
 
+    <h6 class="mt-3">Artículos publicados</h6>
+    <ul class="list-unstyled">
+        {% for articulo in ultimos_articulos %}
+            <li>
+                <a href="{% url 'detalle_articulo' articulo.id %}" class="text-white">{{ articulo.titulo }}</a>
+            </li>
+        {% empty %}
+            <li class="text-muted">No has publicado artículos todavía.</li>
+        {% endfor %}
+    </ul>
+
+    <h6 class="mt-3">Comentarios recientes</h6>
+    <ul class="list-unstyled">
+        {% for comentario in ultimos_comentarios %}
+            <li class="text-white">
+                En <a href="{% url 'detalle_articulo' comentario.articulo.id %}" class="text-info">{{ comentario.articulo.titulo }}</a>:<br>
+                <em>"{{ comentario.contenido|truncatechars:50 }}"</em>
+            </li>
+        {% empty %}
+            <li class="text-muted">No has hecho comentarios todavía.</li>
+        {% endfor %}
+    </ul>
+</div>
     <div class="div4 box">Notificaciones</div>
     <div class="div5 box">Favoritos</div>
     <div class="div6 box">Estadísticas</div>
