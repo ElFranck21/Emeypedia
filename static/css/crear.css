@@ -1,0 +1,68 @@
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        background-attachment: fixed;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        background-color: #ffffffdd;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* relieve */
+    }
+
+    form p {
+        margin-bottom: 20px;
+    }
+
+    form label {
+        display: block;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 6px;
+        text-align: left;
+    }
+
+    form input[type="text"],
+    form input[type="file"],
+    form textarea,
+    form select {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    .btn-custom {
+        background-color: #198754;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn-custom:hover {
+        background-color: #157347;
+    }

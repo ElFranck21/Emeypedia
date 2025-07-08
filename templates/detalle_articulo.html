@@ -22,47 +22,55 @@
                 <div class="content-wrap">
             
                     <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #1f1c2c, #77709b);">
-                    <div class="container px-5">
+            <div class="container px-5 d-flex align-items-center">
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                    <img src="{% static 'assets/logo.png' %}" alt="Logo" width="40" height="40" class="me-2">
+                    EMEYPEDIA
+                </a>
 
-                        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
-                            <img src="{% static 'assets/logo.png' %}" alt="Logo" width="40" height="40" class="me-2">
-                            EMEYPEDIA
-                        </a>
+                <!-- Botón responsive -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                <!-- Contenido navbar -->
+                <div class="collapse navbar-collapse d-flex justify-content-between align-items-center" id="navbarSupportedContent">
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                {% if user.is_authenticated %}
-                                    <li class="nav-item">
-                                        <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <form method="post" action="{% url 'logout' %}">
-                                            {% csrf_token %}
-                                            <button type="submit" class="nav-link btn btn-link"> Cerrar sesión</button>
-                                        </form>
-                                    </li>
-                                {% else %}
-                                    <li class="nav-item">
-                                        <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Inicio</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">Regístrate</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Inicia sesión</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                    <!-- Barra de búsqueda centrada -->
+                    <form class="d-flex mx-auto" role="search" action="{% url 'buscar_articulos' %}" method="get" style="max-width: 400px; width: 100%;">
+                        <input class="form-control me-2" type="search" placeholder="Buscar artículos..." name="q" aria-label="Buscar">
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    </form>
 
+                    <!-- Menú de navegación -->
+                    <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav-link btn btn-link">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">Regístrate</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Inicia sesión</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
                 <main class="container-fluid px-0 mx-0">
 
@@ -158,4 +166,3 @@
 
 </body>
 </html>
-

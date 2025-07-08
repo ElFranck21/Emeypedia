@@ -1,5 +1,5 @@
 # comentarios/views.py
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Comentario
 from .forms import ComentarioForm
@@ -19,3 +19,4 @@ def agregar_comentario(request, articulo_id):
     else:
         form = ComentarioForm()
     return redirect('detalle_articulo', articulo_id=articulo.id)
+

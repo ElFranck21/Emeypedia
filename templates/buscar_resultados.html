@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<div class="container py-5">
+    <h2 class="text-center text-black mb-5 display-5">Resultados para: <span class="fw-light">"{{ query }}"</span></h2>
+
+    {% if resultados %}
+        <div class="row g-4">
+            {% for articulo in resultados %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100" style="transition: transform 0.3s;">
+                        {% if articulo.imagenes %}
+                            <img src="{{ articulo.imagenes.url }}" class="card-img-top" alt="{{ articulo.titulo }}" style="height: 160px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body bg-light p-3 d-flex flex-column justify-content-between" style="min-height: 160px;">
+                            <h6 class="card-title text-dark mb-2 text-truncate">{{ articulo.titulo }}</h6>
+                            <p class="card-text text-secondary mb-3"><strong>Tipo:</strong> {{ articulo.get_tipo_display }}</p>
+                            <a href="{% url 'detalle_articulo' articulo.id %}" class="btn btn-gradient w-100 mt-auto btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-white fs-5 mt-5">No se encontraron resultados.</p>
+    {% endif %}
+</div>
+
+<style>
+    .btn-gradient {
+        background: linear-gradient(90deg, #1f1c2c, #77709b);
+        border: none;
+        color: white;
+        transition: background 0.3s ease;
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+
+    .btn-gradient:hover {
+        background: linear-gradient(90deg, #77709b, #1f1c2c);
+        color: white;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}

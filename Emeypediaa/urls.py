@@ -20,5 +20,6 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
     path('comentarios/', include('comentarios.urls')),
+    path('usuarios/', include('usuarios.urls')),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
