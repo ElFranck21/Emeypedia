@@ -89,4 +89,85 @@
   {% endfor %}
 </div>
 
+<h2 class="section-title px-4 pt-4">Películas Clásicas</h2>
+<div class="carousel-inner px-4 d-flex flex-wrap gap-4 mb-5">
+  {% for pelicula in peliculas %}
+    {% if pelicula.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' pelicula.id %}">
+          <img src="{{ pelicula.imagenes.url }}" alt="{{ pelicula.titulo }}">
+          <div class="title">{{ pelicula.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay películas disponibles aún.</p>
+  {% endfor %}
+</div>
+
+<h2 class="section-title px-4 pt-4">Anime</h2>
+<div class="carousel-inner px-4 d-flex flex-wrap gap-4 mb-5">
+  {% for anime in animes %}
+    {% if anime.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' anime.id %}">
+          <img src="{{ anime.imagenes.url }}" alt="{{ anime.titulo }}">
+          <div class="title">{{ anime.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay anime disponible aún.</p>
+  {% endfor %}
+</div>
+
+<h2 class="section-title px-4 pt-4">Libros</h2>
+<div class="carousel-inner px-4 d-flex flex-wrap gap-4 mb-5">
+  {% for libro in libros %}
+    {% if libro.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' libro.id %}">
+          <img src="{{ libro.imagenes.url }}" alt="{{ libro.titulo }}">
+          <div class="title">{{ libro.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay libros disponibles aún.</p>
+  {% endfor %}
+</div>
+
+<h2 class="section-title px-4 pt-4">Música</h2>
+<div class="carousel-inner px-4 d-flex flex-wrap gap-4 mb-5">
+  {% for musica in musicas %}
+    {% if musica.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' musica.id %}">
+          <img src="{{ musica.imagenes.url }}" alt="{{ musica.titulo }}">
+          <div class="title">{{ musica.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay música disponible aún.</p>
+  {% endfor %}
+</div>
+
+<h2 class="section-title px-4 pt-4">Otro</h2>
+<div class="carousel-inner px-4 d-flex flex-wrap gap-4 mb-5">
+  {% for otro in otros %}
+    {% if otro.imagenes %}
+      <div class="media-card">
+        <a href="{% url 'detalle_articulo' otro.id %}">
+          <img src="{{ otro.imagenes.url }}" alt="{{ otro.titulo }}">
+          <div class="title">{{ otro.titulo }}</div>
+        </a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-white px-3">No hay artículos en esta categoría aún.</p>
+  {% endfor %}
+</div>
+
+
 {% endblock %}

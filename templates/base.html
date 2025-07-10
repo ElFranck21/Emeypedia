@@ -72,13 +72,14 @@
             {% block content %}{% endblock %}
         </main>
 
+        {% block footer %} 
         <!-- FOOTER -->
         <footer class="text-white py-5 mt-auto" style="background: linear-gradient(to right, #1f1c2c, #77709b);">
             <div class="container">
                 <div class="row">
                     <!-- Columna izquierda -->
                     <div class="col-md-4 d-flex align-items-center mb-3 mb-md-0">
-                        <img src="{% static 'assets/logo.png' %}" alt="Logo" width="40" height="40" class="me-2">
+                        <img src="{% static 'assets/logotipo.png' %}" alt="Logo" width="40" height="40" class="me-2">
                         <span class="fs-5 fw-bold">EMEYPEDIA</span>
                     </div>
 
@@ -105,6 +106,7 @@
                 </div>
             </div>
         </footer>
+        {% endblock %}
     </div>
 
     <!-- MODAL DE INICIO DE SESIÓN -->
@@ -112,7 +114,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-4" style="border-radius: 1rem;">
           <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+            <h5 class="text-center text-dark" id="loginModalLabel">Iniciar Sesión</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
