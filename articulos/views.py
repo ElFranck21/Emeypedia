@@ -15,10 +15,10 @@ from comentarios.forms import ComentarioForm
 
 def detalle_articulo(request, articulo_id):
     articulo = get_object_or_404(Articulo, id=articulo_id)
-    form = ComentarioForm()
+    C_form = ComentarioForm()
     return render(request, 'detalle_articulo.html', {
         'articulo': articulo,
-        'form': form,
+        'C_form': C_form,
     })
 
 @login_required
