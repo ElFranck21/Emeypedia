@@ -45,7 +45,7 @@ body {
     background: linear-gradient(to bottom, #292929, #444);
     color: white;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 .div4 { grid-row: 3 / span 2; }
 .div5 { grid-row: 5 / span 2; }
