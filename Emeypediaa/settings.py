@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'usuarios.context_processors.login_form',
             ],
         },
     },
@@ -83,9 +84,13 @@ WSGI_APPLICATION = 'Emeypediaa.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'emeypedia',
+        'USER': 'emeyuser',
+        'PASSWORD': 'emeyce',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -135,8 +140,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGOUT_REDIRECT_URL = 'login'
+
 
 
 MEDIA_URL = '/media/'

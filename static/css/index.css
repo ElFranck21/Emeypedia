@@ -160,3 +160,24 @@ footer {
   justify-content: center;
   font-size: 0.9rem;
 }
+
+.card {
+    background-color: #928dab;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-custom {
+    background-color: #198754;
+    color: white;
+    border: none;
+}
+.btn-custom:hover {
+    background-color: #157347;
+}

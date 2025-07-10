@@ -89,3 +89,24 @@ html, body {
     p {
         line-height: 1.6;
     }
+
+.card {
+    background-color: #ffffffcc;
+}
+
+input[type="text"],
+input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-custom {
+    background-color: #198754;
+    color: white;
+    border: none;
+}
+.btn-custom:hover {
+    background-color: #157347;
+}
