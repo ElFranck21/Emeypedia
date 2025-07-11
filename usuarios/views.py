@@ -38,3 +38,4 @@ def perfil_view(request):
     return render(request, 'perfil.html', {
         'articulos_usuario': articulos_usuario
     })
+

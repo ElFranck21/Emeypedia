@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/contactanos.css' %}">
+
+<div class="contact-container">
+    <h1 class="contact-title">¿Cómo podemos ayudarte?</h1>
+
+    <div class="contact-grid">
+        <!-- Columna Izquierda -->
+        <div class="contact-col">
+            <h2>Quiero subir un artículo</h2>
+            <p>
+                Si deseas contribuir con tus artículos, ponte en contacto con nuestro equipo. 
+                Te ayudaremos a publicarlos en nuestra plataforma.
+            </p>
+        </div>
+
+        <!-- Columna Centro -->
+        <div class="contact-col">
+            <h2>Aquí puedes contactarnos</h2>
+            <p>
+                Para cualquier consulta, sugerencia o problema técnico, no dudes en escribirnos.
+            </p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:contacto@emeyce.com">contacto@emeyce.com</a>
+            </p>
+        </div>
+
+        <!-- Columna Derecha -->
+        <div class="contact-col">
+            <h2>Más sugerencias</h2>
+            <p>
+                ¿Tienes ideas sobre cómo mejorar Emeyce? ¡Nos encantaría escucharlas! 
+                Comparte tus sugerencias para seguir creciendo juntos.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

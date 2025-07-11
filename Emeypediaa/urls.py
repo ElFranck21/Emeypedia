@@ -12,14 +12,17 @@ from django.contrib.auth.views import LogoutView
 
 
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('articulos/', include('articulos.urls')),
     path('admin/', admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html', authentication_form=LoginForm), name='login'),
     path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
+    path('contactanos/', views.contactanos, name='contactanos'),
+    path('quienes_somos', views.quienes_somos, name='quienes_somos'),
+    path('terminosyc', views.terminosyc, name='terminosyc'),
     path('comentarios/', include('comentarios.urls')),
     path('usuarios/', include('usuarios.urls')),
-    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

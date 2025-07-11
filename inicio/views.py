@@ -14,3 +14,12 @@ def index(request):
     }
 
     return render(request, 'index.html', context)
+
+def contactanos(request):
+    return render(request, 'contactanos.html')
+
+def quienes_somos(request):
+    return render(request, 'quienes_somos.html')
+
+def terminosyc(request):
+    return render(request, 'terminosyc.html')
