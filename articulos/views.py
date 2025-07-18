@@ -68,3 +68,33 @@ def buscar_articulos(request):
         'resultados': resultados
     })
 
+
+@login_required
+def EditarArt(request, articulo_id):
+    articulo = get_object_or_404(Articulo, pk=articulo_id)
+
+    if request.method == 'POST':
+        form = ArticuloForm(request.POST, request.FILES, instance=articulo)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle_articulo', articulo_id=articulo.id)
+    else:
+        form = ArticuloForm(instance=articulo)
+
+    return render(request, 'editarArt.html', {
+        'form': form,
+        'articulo': articulo
+    })
+
+@login_required
+def eliminar_articulo(request, articulo_id):
+    articulo = get_object_or_404(Articulo, pk=articulo_id)
+
+    if request.user != articulo.autor:
+        return HttpResponse("No tienes permiso para eliminar este artículo.", status=403)
+
+    if request.method == 'POST':
+        articulo.delete()
+        return redirect('perfil')
+
+    return render(request, 'eliminarArt.html', {'articulo': articulo})

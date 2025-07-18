@@ -73,4 +73,4 @@ class Articulo(models.Model):
     autor = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='articulos')
 
     def __str__(self):
-      return f"{self.titulo} - {self.get_tipo_display()}"
+        return f"{self.titulo} - {self.get_tipo_display()}"
