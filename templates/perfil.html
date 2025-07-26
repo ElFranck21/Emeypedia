@@ -13,18 +13,56 @@
 
     <ul class="list-unstyled">
         {% for articulo in articulos_usuario %}
-            <li class="mb-2">
-                <a href="{% url 'detalle_articulo' articulo.id %}" class="text-info">
-                    {{ articulo.titulo }}
-                </a>
-                |
-                <a href="{% url 'editar_articulo' articulo.id %}" class="text-warning">Editar</a>
-                |
-                <a href="{% url 'eliminar_articulo' articulo.id %}" class="text-danger">Eliminar</a>
-            </li>
+            <li class="mb-2 d-flex align-items-center gap-2">
+
+    <a href="{% url 'detalle_articulo' articulo.id %}" 
+       class="btn btn-primary"
+       style="border-radius: 0.6rem; padding: 0.4rem 0.8rem;">
+       {{ articulo.titulo }}
+    </a>
+    <a href="{% url 'editar_articulo' articulo.id %}" 
+       class="btn btn-warning text-dark"
+       style="border-radius: 0.6rem; padding: 0.4rem 0.8rem;">
+       ✏️ Editar
+    </a>
+    <button class="btn btn-danger" 
+            style="border-radius: 0.6rem; padding: 0.4rem 0.8rem;"
+            data-bs-toggle="modal" 
+            data-bs-target="#deleteArticleModal">
+        🗑️ Eliminar
+    </button>
+
+</li>
         {% empty %}
             <li class="text-muted">Aún no has publicado artículos.</li>
         {% endfor %}
     </ul>
 </div>
+
+
+<!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN -->
+<div class="modal fade" id="deleteArticleModal" tabindex="-1" aria-labelledby="deleteArticleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4" style="border-radius: 1rem;">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="deleteArticleModalLabel">Eliminar artículo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body text-center text-dark">
+        <p>¿Estás seguro que deseas eliminar el artículo <strong></strong>?</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
