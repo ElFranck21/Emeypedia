@@ -27,31 +27,37 @@
 
         <!-- Actividad reciente -->
         <div class="card">
+            
             <h5>Artículos publicados</h5>
             <ul>
-                {% for articulo in ultimos_articulos %}
-                    <li><a href="{% url 'detalle_articulo' articulo.id %}">{{ articulo.titulo }}</a></li>
-                {% empty %}
-                    <li>No has publicado artículos todavía.</li>
-                {% endfor %}
+                {% if articulos %}
+                    <ul>
+                    {% for articulo in articulos %}
+                        <li><a href="{% url 'detalle_articulo' articulo.id %}">{{ articulo.titulo }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No has publicado artículos todavía.</p>
+                {% endif %}
+
             </ul>
         </div>
-
         <div class="card">
             <h5>Comentarios recientes</h5>
             <ul>
-                {% for comentario in ultimos_comentarios %}
-                    <li>
-                        En <a href="{% url 'detalle_articulo' comentario.articulo.id %}">{{ comentario.articulo.titulo }}</a>: 
-                        <em>"{{ comentario.contenido|truncatechars:50 }}"</em>
-                    </li>
-                {% empty %}
-                    <li>No has hecho comentarios todavía.</li>
-                {% endfor %}
+                {% if comentarios %}
+                    <ul>
+                    {% for comentario in comentarios %}
+                        <li>{{ comentario.texto }} en <a> {{ comentario.articulo.titulo }} </a> </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No has hecho comentarios todavía.</p>
+                {% endif %}
             </ul>
         </div>
 
-        <!-- Quick links -->
+        <!-- links -->
         <div class="card quick-links">
             <a href="#">Notificaciones ➡</a>
             <a href="#">Favoritos ➡</a>
