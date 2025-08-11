@@ -45,13 +45,12 @@
                     <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+                                <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'redireccion_dashboard' %}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <form method="post" action="{% url 'logout' %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="nav-link btn btn-link">Cerrar sesión</button>
-                                </form>
+                                <button type="button" class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    Cerrar sesión
+                                </button>
                             </li>
                         {% else %}
                             <li class="nav-item">
@@ -155,5 +154,32 @@
         </div>
       </div>
     </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE CIERRE DE SESIÓN -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4" style="border-radius: 1rem;">
+      
+      <div class="modal-header">
+        <h5 class="modal-title text-warning" id="logoutModalLabel">Cerrar sesión</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body text-center text-dark">
+        <p>¿Estás seguro que deseas cerrar tu sesión?</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <!-- Formulario que apunta al logout -->
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-warning">Sí, cerrar sesión</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

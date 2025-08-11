@@ -19,4 +19,3 @@ def agregar_comentario(request, articulo_id):
     else:
         form = ComentarioForm()
     return redirect('detalle_articulo', articulo_id=articulo.id)
-
