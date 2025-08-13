@@ -23,15 +23,18 @@ def detalle_articulo(request, articulo_id):
 
 @login_required
 def crear_articulo(request):
-    if request.method == 'POST':
-        form = ArticuloForm(request.POST, request.FILES)
-        if form.is_valid():
-            articulo = form.save(commit=False)  # no lo guardamos aún
-            articulo.autor = request.user       # asignamos el autor
-            articulo.save()
-            return redirect('index')
+    if request.user.is_staff or request.user.is_superuser:
+        if request.method == 'POST':
+            form = ArticuloForm(request.POST, request.FILES)
+            if form.is_valid():
+                articulo = form.save(commit=False)  # no lo guardamos aún
+                articulo.autor = request.user       # asignamos el autor
+                articulo.save()
+                return redirect('index')
+        else:
+            form = ArticuloForm()
     else:
-        form = ArticuloForm()
+        return HttpResponse("con todo respeto carnalito, chingas a tu madre", status=403)
     
     return render(request, 'crear_articulo.html', {'form': form})
 

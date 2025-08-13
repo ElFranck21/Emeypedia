@@ -95,10 +95,14 @@
                     <div class="col-md-4 text-md-end text-center">
                         <ul class="list-unstyled">
                             <li><a href="{% url 'terminosyc' %}" class="text-white text-decoration-none">Términos y Condiciones</a></li>
-                            <li><a href="{% url 'perfil' %}" class="text-white text-decoration-none">Tus artículos</a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'perfil' %}" class="text-white text-decoration-none">Tus artículos</a></li>
+                            {% else %}
+                                <li><a href="#" class="text-white text-decoration-none link-protegido" data-href="{% url 'perfil' %}">Tus artículos</a></li>
+                            {% endif %}
                         </ul>
                     </div>
-                </div>
+                    </div>
 
                 <!-- Línea inferior -->
                 <div class="text-center mt-3">
@@ -181,5 +185,36 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Escribimos un booleano JS seguro usando un if de plantilla
+        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+
+        document.querySelectorAll(".link-protegido").forEach(link => {
+            link.addEventListener("click", function(event) {
+                const targetUrl = link.dataset.href || link.getAttribute('href');
+
+            if (!isAuthenticated) {
+                // Evitar que vaya al servidor y abrir modal
+                event.preventDefault();
+
+                // Guardar la URL destino en el input hidden del modal para redirigir después del login
+                const nextInput = document.querySelector('#loginModal input[name="next"]');
+                if (nextInput) nextInput.value = targetUrl || '/';
+
+                const modalEl = document.getElementById('loginModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            } else {
+                // Si está autenticado, seguir al enlace real
+                if (targetUrl) window.location.href = targetUrl;
+            }
+        });
+    });
+});
+</script>
 </body>
+
 </html>
+
