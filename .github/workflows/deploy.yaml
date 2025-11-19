@@ -1,0 +1,16 @@
+name: Prueba de conexión con GitHub Actions
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hacer checkout del código
+        uses: actions/checkout@v4
+
+      - name: Mostrar mensaje de prueba
+        run: echo "GitHub Actions está conectado correctamente al repositorio de Emeypedia"

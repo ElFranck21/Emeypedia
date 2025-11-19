@@ -26,8 +26,10 @@ def crear_articulo(request):
     if request.method == 'POST':
         form = ArticuloForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('index') 
+            articulo = form.save(commit=False)  # no lo guardamos aún
+            articulo.autor = request.user       # asignamos el autor
+            articulo.save()
+            return redirect('index')
     else:
         form = ArticuloForm()
     
@@ -97,4 +99,4 @@ def eliminar_articulo(request, articulo_id):
         articulo.delete()
         return redirect('perfil')
 
-    return render(request, 'eliminarArt.html', {'articulo': articulo})
+    return render(request, 'perfil.html', {'articulo': articulo})

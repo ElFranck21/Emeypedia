@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>EMEYPEDIA</title>
+
+    <!-- Estilos propios -->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" />
+
+    <!-- Bootstrap 5.3.0 (una sola versión) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="d-flex flex-column min-vh-100">
+
+        <!-- NAVBAR FIJA -->
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, #1f1c2c, #77709b);">
+            <div class="container px-5 d-flex align-items-center">
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                    <img src="{% static 'assets/logotipo.png' %}" alt="Logo" width="40" height="40" class="me-2">
+                    EMEYPEDIA
+                </a>
+
+                <!-- Botón responsive -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Contenido navbar -->
+                <div class="collapse navbar-collapse d-flex justify-content-between align-items-center" id="navbarSupportedContent">
+
+                    <!-- Barra de búsqueda centrada -->
+                    <form class="d-flex mx-auto" role="search" action="{% url 'buscar_articulos' %}" method="get" style="max-width: 400px; width: 100%;">
+                        <input class="form-control me-2" type="search" placeholder="Buscar artículos..." name="q" aria-label="Buscar">
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    </form>
+
+                    <!-- Menú de navegación -->
+                    <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'redireccion_dashboard' %}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    Cerrar sesión
+                                </button>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Inicia sesión</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- FIN NAVBAR -->
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-grow-1">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {% block footer %}
+        <!-- FOOTER -->
+        <footer class="text-white py-5 mt-auto" style="background: linear-gradient(to right, #1f1c2c, #77709b);">
+            <div class="container">
+                <div class="row">
+                    <!-- Columna izquierda -->
+                    <div class="col-md-4 d-flex align-items-center mb-3 mb-md-0">
+                        <img src="{% static 'assets/logotipo.png' %}" alt="Logo" width="40" height="40" class="me-2">
+                        <span class="fs-5 fw-bold">EMEYPEDIA</span>
+                    </div>
+
+                    <!-- Columna centro -->
+                    <div class="col-md-4 mb-3 mb-md-0 text-center">
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'contactanos' %}" class="text-white text-decoration-none">Contáctanos</a></li>
+                            <li><a href="{% url 'quienes_somos' %}" class="text-white text-decoration-none">¿Quiénes somos?</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna derecha -->
+                    <div class="col-md-4 text-md-end text-center">
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'terminosyc' %}" class="text-white text-decoration-none">Términos y Condiciones</a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'perfil' %}" class="text-white text-decoration-none">Tus artículos</a></li>
+                            {% else %}
+                                <li><a href="#" class="text-white text-decoration-none link-protegido" data-href="{% url 'perfil' %}">Tus artículos</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Línea inferior -->
+                <div class="text-center mt-3">
+                    <span class="fw-light">© 2025 EMEYPEDIA. Todos los derechos reservados.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% endblock %}
+
+    <!-- MODAL DE INICIO DE SESIÓN -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4" style="border-radius: 1rem;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    Usuario o contraseña incorrectos
+                </div>
+            {% endif %}
+
+            <form method="post" class="text-start" action="{% url 'login' %}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+            {% csrf_token %}
+
+            <div class="text-dark text-center">
+                <label for="id_username" class="form-label">Nombre de usuario</label><br>
+                {{ form.username }}
+            </div>
+
+            <div class="text-dark text-center">
+                <label for="id_password" class="form-label">Contraseña</label><br>
+                {{ form.password }}
+            </div>
+            <br>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-custom">Ingresar</button>
+            </div>
+        </form>
+
+
+            <div class="mt-3 text-center">
+                <p>¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE CIERRE DE SESIÓN -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4" style="border-radius: 1rem;">
+      
+      <div class="modal-header">
+        <h5 class="modal-title text-warning" id="logoutModalLabel">Cerrar sesión</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body text-center text-dark">
+        <p>¿Estás seguro que deseas cerrar tu sesión?</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <!-- Formulario que apunta al logout -->
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-warning">Sí, cerrar sesión</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+ <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Escribimos un booleano JS seguro usando un if de plantilla
+        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+
+        document.querySelectorAll(".link-protegido").forEach(link => {
+            link.addEventListener("click", function(event) {
+                const targetUrl = link.dataset.href || link.getAttribute('href');
+
+            if (!isAuthenticated) {
+                // Evitar que vaya al servidor y abrir modal
+                event.preventDefault();
+
+                // Guardar la URL destino en el input hidden del modal para redirigir después del login
+                const nextInput = document.querySelector('#loginModal input[name="next"]');
+                if (nextInput) nextInput.value = targetUrl || '/';
+
+                const modalEl = document.getElementById('loginModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            } else {
+                // Si está autenticado, seguir al enlace real
+                if (targetUrl) window.location.href = targetUrl;
+            }
+        });
+    });
+});
+</script>
+</html>

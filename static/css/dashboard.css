@@ -1,95 +1,131 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: black;
-    margin: 0;
-    padding: 0;
-}
 
-.parent {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    gap: 10px;
-    padding: 10px;
-}
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        background-color: #fafafa;
+        color: #000;
+    }
 
-.header {
-    grid-column: 1 / span 10;
-    grid-row: 1 / span 2;
-    background: linear-gradient(to right, #1f1c2c, #77709b);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
+    .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 0 20px;
+        display: flex;
+        gap: 20px;
+    }
 
-.sidebar {
-    grid-column: 1 / span 2;
-    grid-row: 3 / span 8;
-    background: linear-gradient(to bottom, #1f1c2c, #2e2a47);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
+    /* Sidebar estilo Netflix */
+    .sidebar {
+        width: 240px;
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        height: fit-content;
+    }
 
-.content {
-    grid-column: 3 / span 7;
-    grid-row: 3 / span 8;
-    background: linear-gradient(to bottom, #1a1a1a, #33334d);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
+    .sidebar h4 {
+        margin-bottom: 15px;
+    }
 
-.div4, .div5, .div6, .div7 {
-    grid-column: 10 / span 1;
-    background: linear-gradient(to bottom, #292929, #444);
-    color: white;
-    padding: 10px;
-    border-radius: 30px;
-}
-.div4 { grid-row: 3 / span 2; }
-.div5 { grid-row: 5 / span 2; }
-.div6 { grid-row: 7 / span 2; }
-.div7 { grid-row: 9 / span 2; }
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-p {
-    color: wheat;
-}
+    .sidebar li {
+        margin-bottom: 12px;
+    }
 
-.dashboard-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+    .sidebar a,
+    .sidebar button {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+        text-decoration: none;
+        color: black;
+        text-align: left;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
 
-.dashboard-menu li {
-    margin-bottom: 10px;
-}
+    .sidebar a:hover,
+    .sidebar button:hover {
+        background-color: #e5e5e5;
+    }
 
-.btn-dash {
-    display: block;
-    width: 100%;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    background: linear-gradient(to right, #373b44, #4286f4);
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
+    .logout {
+        background-color: #ff4d4d;
+        color: white !important;
+    }
 
-.btn-dash:hover {
-    background: linear-gradient(to right, #4e54c8, #8f94fb);
-    transform: translateY(-2px);
-}
+    /* Contenido principal */
+    .main-content {
+        flex: 1;
+    }
 
-.logout {
-    background: linear-gradient(to right, #c31432, #240b36);
-}
+    .main-content h2 {
+        margin-bottom: 15px;
+    }
 
-.logout:hover {
-    background: linear-gradient(to right, #ff416c, #ff4b2b);
-}
+    .card {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .badge {
+        background-color: #1a4ed8;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        display: inline-block;
+    }
+
+    .card h5 {
+        margin-top: 0;
+    }
+
+    .card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .card ul li {
+        margin-bottom: 8px;
+    }
+
+    .card ul li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .card ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Quick links */
+    .quick-links a {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        text-decoration: none;
+        color: black;
+    }
+
+    .quick-links a:last-child {
+        border-bottom: none;
+    }
+
+    .logout{
+        color: tomato;
+    }
