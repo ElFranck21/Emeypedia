@@ -102,7 +102,7 @@
                             {% endif %}
                         </ul>
                     </div>
-                </div>
+                    </div>
 
                 <!-- Línea inferior -->
                 <div class="text-center mt-3">
@@ -185,7 +185,37 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Escribimos un booleano JS seguro usando un if de plantilla
+        const isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+
+        document.querySelectorAll(".link-protegido").forEach(link => {
+            link.addEventListener("click", function(event) {
+                const targetUrl = link.dataset.href || link.getAttribute('href');
+
+            if (!isAuthenticated) {
+                // Evitar que vaya al servidor y abrir modal
+                event.preventDefault();
+
+                // Guardar la URL destino en el input hidden del modal para redirigir después del login
+                const nextInput = document.querySelector('#loginModal input[name="next"]');
+                if (nextInput) nextInput.value = targetUrl || '/';
+
+                const modalEl = document.getElementById('loginModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            } else {
+                // Si está autenticado, seguir al enlace real
+                if (targetUrl) window.location.href = targetUrl;
+            }
+        });
+    });
+});
+</script>
 </body>
+<<<<<<< HEAD
  <script>
     document.addEventListener("DOMContentLoaded", function() {
     // Escribimos un booleano JS seguro usando un if de plantilla
@@ -214,4 +244,8 @@
     });
 });
 </script>
+=======
+
+>>>>>>> e84d77532cc0b75afc888ecd894884901eb769c0
 </html>
+
