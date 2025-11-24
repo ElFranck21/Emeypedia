@@ -13,6 +13,7 @@ from django.contrib.auth.views import LogoutView
 
 
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', CustomLoginView.as_view(), name='login'),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('comentarios/', include('comentarios.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('logout/', LogoutView.as_view(next_page='index'), name='logout'),
+    path('service-worker.js', views.service_worker, name='service-worker'),
+    path('offline/', views.offline, name='offline'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
